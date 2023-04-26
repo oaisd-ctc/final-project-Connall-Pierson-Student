@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 148592534}
   - component: {fileID: 148592533}
   - component: {fileID: 148592532}
+  - component: {fileID: 148592536}
   m_Layer: 5
   m_Name: Canvas player 1
   m_TagString: Untagged
@@ -220,14 +221,29 @@ RectTransform:
   - {fileID: 1827627276}
   - {fileID: 1015031634}
   - {fileID: 613812685}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 920687817}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &148592536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148592531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters: []
+  selectedCharacter: 0
+  isReady: 0
 --- !u!1 &425821869
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +459,6 @@ GameObject:
   - component: {fileID: 613812689}
   - component: {fileID: 613812688}
   - component: {fileID: 613812687}
-  - component: {fileID: 613812686}
   m_Layer: 5
   m_Name: Ready up
   m_TagString: Untagged
@@ -472,20 +487,6 @@ RectTransform:
   m_AnchoredPosition: {x: -400, y: -237}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &613812686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613812684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  selectedCharacter: 0
 --- !u!114 &613812687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +530,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 613812688}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 148592536}
+        m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
+        m_MethodName: IsReadyToGo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &613812688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,7 +593,6 @@ GameObject:
   - component: {fileID: 725674778}
   - component: {fileID: 725674777}
   - component: {fileID: 725674776}
-  - component: {fileID: 725674775}
   m_Layer: 5
   m_Name: Previous
   m_TagString: Untagged
@@ -609,20 +621,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &725674775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725674773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  selectedCharacter: 0
 --- !u!114 &725674776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 725674775}
+      - m_Target: {fileID: 1453374977}
         m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
         m_MethodName: PreviousCharacter
         m_Mode: 1
@@ -729,7 +727,6 @@ GameObject:
   - component: {fileID: 777572863}
   - component: {fileID: 777572862}
   - component: {fileID: 777572861}
-  - component: {fileID: 777572860}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -758,20 +755,6 @@ RectTransform:
   m_AnchoredPosition: {x: 600, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &777572860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777572858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  selectedCharacter: 0
 --- !u!114 &777572861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +799,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 777572860}
+      - m_Target: {fileID: 1453374977}
         m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
         m_MethodName: NextCharacter
         m_Mode: 1
@@ -958,8 +941,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1093,8 +1076,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1136,6 +1119,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833532672}
   m_CullTransparentMesh: 1
+--- !u!1 &920687815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920687817}
+  - component: {fileID: 920687816}
+  m_Layer: 0
+  m_Name: Canvases
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &920687816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920687815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09fe7016266ef249b66e851760c486a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 148592536}
+  player2: {fileID: 1453374977}
+--- !u!4 &920687817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920687815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 148592535}
+  - {fileID: 1453374976}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1015031633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1179,6 @@ GameObject:
   - component: {fileID: 1015031638}
   - component: {fileID: 1015031637}
   - component: {fileID: 1015031636}
-  - component: {fileID: 1015031635}
   m_Layer: 5
   m_Name: Previous
   m_TagString: Untagged
@@ -1177,20 +1207,6 @@ RectTransform:
   m_AnchoredPosition: {x: -600, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1015031635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015031633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  selectedCharacter: 0
 --- !u!114 &1015031636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,7 +1251,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1015031635}
+      - m_Target: {fileID: 148592536}
         m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
         m_MethodName: PreviousCharacter
         m_Mode: 1
@@ -1434,13 +1450,14 @@ GameObject:
   - component: {fileID: 1453374975}
   - component: {fileID: 1453374974}
   - component: {fileID: 1453374973}
+  - component: {fileID: 1453374977}
   m_Layer: 5
   m_Name: Canvas player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1453374973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,14 +1536,29 @@ RectTransform:
   - {fileID: 777572859}
   - {fileID: 725674774}
   - {fileID: 1763431074}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 920687817}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1453374977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453374972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters: []
+  selectedCharacter: 0
+  isReady: 0
 --- !u!1 &1601665677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   selectedCharacter: 0
+  isReady: 0
 --- !u!1 &1617203315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,7 +1755,6 @@ GameObject:
   - component: {fileID: 1763431078}
   - component: {fileID: 1763431077}
   - component: {fileID: 1763431076}
-  - component: {fileID: 1763431075}
   m_Layer: 5
   m_Name: Ready up
   m_TagString: Untagged
@@ -1751,20 +1783,6 @@ RectTransform:
   m_AnchoredPosition: {x: 400, y: -237}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1763431075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763431073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  selectedCharacter: 0
 --- !u!114 &1763431076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1808,7 +1826,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1763431077}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1453374977}
+        m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
+        m_MethodName: IsReadyToGo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1763431077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,7 +1889,6 @@ GameObject:
   - component: {fileID: 1827627280}
   - component: {fileID: 1827627279}
   - component: {fileID: 1827627278}
-  - component: {fileID: 1827627277}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -1888,20 +1917,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1827627277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827627275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582724d097a12b34cbd559033674a72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  selectedCharacter: 0
 --- !u!114 &1827627278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1946,7 +1961,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1827627277}
+      - m_Target: {fileID: 148592536}
         m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
         m_MethodName: NextCharacter
         m_Mode: 1

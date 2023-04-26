@@ -16,6 +16,9 @@ public class LevelManager : MonoBehaviour
         // scoreKeeper.ResetScore();
         SceneManager.LoadScene("Game");
     }
+    public void LoadChararcterMenu(){
+        SceneManager.LoadScene("CharacterSelection");
+    }
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("Main Menu");

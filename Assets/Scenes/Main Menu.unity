@@ -1068,7 +1068,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1783681690}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadGame
+        m_MethodName: LoadChararcterMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
