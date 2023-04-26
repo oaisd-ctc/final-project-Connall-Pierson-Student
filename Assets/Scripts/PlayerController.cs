@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class PlayerController : MonoBehaviour
     public GameObject tankBody;
     public GameObject projectile;
     public GameObject tankGunFront;
+
     [HideInInspector] public Vector2 rawInputVector;
     Rigidbody2D rb;
+    bool isMovingAtMaxSpeedX;
+    bool isMovingAtMaxSpeedY;
 
     [Header("Tank Stats")]
     [SerializeField] float tankAccelerationSpeed = 5f;
@@ -33,16 +37,30 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         RotateGun();
-        //RotateBody();
     }
 
     void Move()
     {
-        if (rb.velocity.magnitude < tankSpeedThreshold)
-            rb.velocity += rawInputVector * Time.deltaTime * tankAccelerationSpeed;
-        else
+        if (rb.velocity.x < tankSpeedThreshold && rb.velocity.x > -tankSpeedThreshold)
         {
-            rb.velocity = new Vector3(tankSpeedThreshold, tankSpeedThreshold);
+            isMovingAtMaxSpeedX = false;
+            rb.velocity += rawInputVector * Time.deltaTime * tankAccelerationSpeed;
+        }
+        else if (!isMovingAtMaxSpeedX)
+        {
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * tankSpeedThreshold, rb.velocity.y);
+            isMovingAtMaxSpeedX = true;
+        }
+
+        if (rb.velocity.y < tankSpeedThreshold && rb.velocity.y > -tankSpeedThreshold)
+        {
+            isMovingAtMaxSpeedY = false;
+            rb.velocity += rawInputVector * Time.deltaTime * tankAccelerationSpeed;
+        }
+        else if (!isMovingAtMaxSpeedY)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * tankSpeedThreshold);
+            isMovingAtMaxSpeedY = true;
         }
     }
 
