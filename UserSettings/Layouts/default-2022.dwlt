@@ -441,9 +441,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 17}
+<<<<<<< Updated upstream
     m_SelectedIDs: 886c0000
     m_LastClickedID: 27784
     m_ExpandedIDs: 000000006e6c000000ca9a3b
+=======
+    m_SelectedIDs: fa650000
+    m_LastClickedID: 26106
+    m_ExpandedIDs: 00000000c865000000ca9a3b
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -471,7 +477,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< Updated upstream
     m_ExpandedIDs: 000000006e6c0000
+=======
+    m_ExpandedIDs: 00000000c8650000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -498,7 +508,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -979,9 +989,15 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: 16.65753, y: 203.61136, z: -8.026663}
     speed: 2
     m_Value: {x: 16.65753, y: 203.61136, z: -8.026663}
+=======
+    m_Target: {x: -11.14551, y: -3.3674047, z: 0.056406222}
+    speed: 2
+    m_Value: {x: -11.14551, y: -3.3674047, z: 0.056406222}
+>>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1031,9 +1047,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< Updated upstream
     m_Target: 720.0544
     speed: 2
     m_Value: 720.0544
+=======
+    m_Target: 6.400997
+    speed: 2
+    m_Value: 6.400997
+>>>>>>> Stashed changes
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1096,7 +1118,11 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< Updated upstream
       m_ExpandedIDs: 6a17ffff5c97ffff3e98ffff5e98ffff62bfffff64bfffff68bfffffc0c0ffff02c1ffffbac2ffff1edeffff74dfffffbe6c0000
+=======
+      m_ExpandedIDs: 14fbffff
+>>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
