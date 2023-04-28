@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class MainMenuControls : MonoBehaviour
 {
-    Canvas canvas;
+    [SerializeField]Canvas mainCanvas;
+    [SerializeField]Canvas settingsCanvas;
+    [SerializeField]Canvas creditsCanvas;
+    
     void Awake()
     {
-        // i have no idea what im doing...
-        canvas = FindObjectOfType<Canvas>();
+        
     }
     void Start()
     {
 
     }
-    void DisableCanvas()
+    void DisableCanvas(Canvas canvas)
     {
-        canvas.gameObject.SetActive(false);
+       canvas.gameObject.SetActive(false);
     }
 }
