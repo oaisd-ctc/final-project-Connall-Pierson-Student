@@ -61,7 +61,7 @@ public class PlayerSetup : MonoBehaviour
         {
             GameObject projectileCreated = Instantiate(playerOne.projectile, playerOne.tankGunFront.transform.position, playerOne.tankGun.transform.rotation);
             Destroy(projectileCreated, 5f);
-            projectileCreated.layer = gameObject.layer;
+            projectileCreated.layer = playerOne.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
                 var projectileRigidBody = projectileCreated.GetComponent<Rigidbody2D>();
@@ -78,7 +78,7 @@ public class PlayerSetup : MonoBehaviour
         while (IsFiringPlayerTwo)
         {
             GameObject projectileCreated = Instantiate(playerTwo.projectile, playerTwo.tankGunFront.transform.position, playerTwo.tankGun.transform.rotation);
-            projectileCreated.layer = gameObject.layer;
+            projectileCreated.layer = playerTwo.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
                 var projectileRigidBody = projectileCreated.GetComponent<Rigidbody2D>();
