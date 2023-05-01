@@ -91,4 +91,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void Respawn(Transform trans)
+    {
+        gameObject.SetActive(true);
+        gameObject.transform.position = trans.position;
+        GetComponent<Health>().ResetHealth();
+    }
 }

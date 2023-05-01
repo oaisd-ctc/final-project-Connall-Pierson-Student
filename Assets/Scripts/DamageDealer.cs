@@ -9,7 +9,7 @@ public class DamageDealer : MonoBehaviour
     {
         if(other.gameObject.GetComponent<Health>() != null && other.gameObject.layer != gameObject.layer)
         {
-            other.gameObject.GetComponent<Health>().Damage(damage);
+            other.gameObject.GetComponent<Health>().Damage(damage, gameObject.GetComponent<ProjectileBehavior>().projectileOwner);
             if(GetComponent<ProjectileBehavior>() != null)
             {
                 Destroy(gameObject);
