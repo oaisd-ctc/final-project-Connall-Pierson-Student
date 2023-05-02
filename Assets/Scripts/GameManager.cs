@@ -4,12 +4,23 @@ using UnityEngine;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
+    [Header("Spawn Points")]
     [SerializeField] Transform playerOneSpawnPoint;
     [SerializeField] Transform playerTwoSpawnPoint;
+
+    [Header("Player Controllers")]
     [SerializeField] PlayerController playerOne;
     [SerializeField] PlayerController playerTwo;
+
+    [Header("Text")]
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI broadcastText;
+
+    [Header("Variables")]
+    [SerializeField] float delayBetweenRounds = 2f;
+    [SerializeField] float delayToMainMenu = 2f;
+    [SerializeField] int scoreToWin = 3;
+
     [HideInInspector] public int playerOneScore = 0;
     [HideInInspector] public int playerTwoScore = 0;
 
@@ -19,42 +30,50 @@ public class GameManager : MonoBehaviour
         scoreText.text = playerOneScore + " - " + playerTwoScore;
         broadcastText.text = "";
     }
-    public void Win(PlayerController player)
+    void Start()
+    {
+        playerOne.gameObject.transform.position = playerOneSpawnPoint.position;
+        playerTwo.gameObject.transform.position = playerTwoSpawnPoint.position;
+    }
+    public void WinRound(PlayerController player)
     {
         if (player.playerNum == 1)
         {
             playerOneScore++;
-            if (playerOneScore >= 11)
+            if (playerOneScore >= scoreToWin)
             {
                 broadcastText.text = "Player One Wins!";
-                Invoke("LevelManager.LoadMainMenu", 2f);
-                return;
+                Invoke("LoadMainMenu", delayToMainMenu);
             }
             else
             {
                 broadcastText.text = "Player One Won This Round!";
-                Invoke("NextRound", 2f);
+                Invoke("NextRound", delayBetweenRounds);
             }
         }
         else
         {
             playerTwoScore++;
-            if (playerTwoScore >= 11)
+            if (playerTwoScore >= scoreToWin)
             {
                 broadcastText.text = "Player Two Wins!";
-                Invoke("LevelManager.LoadMainMenu", 2f);
-                return;
+                Invoke("LoadMainMenu", delayToMainMenu);
             }
             else
             {
                 broadcastText.text = "Player Two Won This Round!";
-                Invoke("NextRound", 2f);
+                Invoke("NextRound", delayBetweenRounds);
             }
         }
         scoreText.text = playerOneScore + " - " + playerTwoScore;
     }
-
-    public void NextRound()
+    
+    void LoadMainMenu()
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        levelManager.LoadMainMenu();
+    }
+    void NextRound()
     {
         broadcastText.text = "";
         RespawnPlayers();
