@@ -6,13 +6,10 @@ public class ProjectileBehavior : MonoBehaviour
 {
     public float projectileSpeed = 30f;
     Rigidbody2D rb;
-    void Awake()
+    [HideInInspector] public PlayerController projectileOwner;
+    void OnTriggerEnter2D(Collider2D other) 
     {
-        
-    }
-
-    void Update()
-    {
-        
+        if(other.tag != "Fence")
+            Destroy(gameObject);
     }
 }

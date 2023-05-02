@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerSetup : MonoBehaviour
 {
-    [SerializeField] PlayerController playerOne;
-    [SerializeField] PlayerController playerTwo;
+    public PlayerController playerOne;
+    public PlayerController playerTwo;
 
     Coroutine FiringCoroutinePlayerOne;
     Coroutine FiringCoroutinePlayerTwo;
@@ -60,7 +60,8 @@ public class PlayerSetup : MonoBehaviour
         while (IsFiringPlayerOne)
         {
             GameObject projectileCreated = Instantiate(playerOne.projectile, playerOne.tankGunFront.transform.position, playerOne.tankGun.transform.rotation);
-            Destroy(projectileCreated, 5f);
+            projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerOne.GetComponent<PlayerController>();
+            Destroy(projectileCreated, 2f);
             projectileCreated.layer = playerOne.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
@@ -78,6 +79,7 @@ public class PlayerSetup : MonoBehaviour
         while (IsFiringPlayerTwo)
         {
             GameObject projectileCreated = Instantiate(playerTwo.projectile, playerTwo.tankGunFront.transform.position, playerTwo.tankGun.transform.rotation);
+            projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerTwo.GetComponent<PlayerController>();
             projectileCreated.layer = playerTwo.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
