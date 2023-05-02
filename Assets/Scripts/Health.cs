@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] UnityEngine.UI.Slider healthSlider;
+    [SerializeField] Slider healthSlider;
     public float health = 100f;
 
-    void Awake()
+    void Start()
     {
         healthSlider.value = health;
     }
-    public void Damage(float damage)
+
+    public void ResetHealth()
     {
+        health = 100f;
+        healthSlider.value = health;
+    }
+    public void Damage(float damage, PlayerController dealer)
+    {
+        Debug.Log(dealer);
         health -= damage;
         healthSlider.value = health / 100f;
         if (health < Mathf.Epsilon)
         {
+            GameManager gameManager = FindObjectOfType<GameManager>();
             healthSlider.value = health;
-            Destroy(gameObject);
+            gameManager.WinRound(dealer);
+            gameObject.SetActive(false);
         }
     }
 }
