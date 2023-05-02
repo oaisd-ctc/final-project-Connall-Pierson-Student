@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     public void ResetHealth()
     {
         health = 100f;
+        healthSlider.value = health;
     }
     public void Damage(float damage, PlayerController dealer)
     {
@@ -26,7 +27,7 @@ public class Health : MonoBehaviour
         {
             GameManager gameManager = FindObjectOfType<GameManager>();
             healthSlider.value = health;
-            gameManager.Win(dealer);
+            gameManager.WinRound(dealer);
             gameObject.SetActive(false);
         }
     }
