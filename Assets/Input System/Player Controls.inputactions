@@ -1,5 +1,5 @@
 {
-    "name": "Player 1",
+    "name": "Player Controls",
     "maps": [
         {
             "name": "Player",
@@ -182,6 +182,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd0dda67-cd6e-4809-8957-bcaf7fb3e359",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
