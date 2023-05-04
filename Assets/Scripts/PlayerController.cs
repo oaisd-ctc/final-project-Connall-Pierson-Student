@@ -83,21 +83,22 @@ public class PlayerController : MonoBehaviour
         //player two controls
         else
         {
-            if ((Keyboard.current.uKey.isPressed && !Keyboard.current.oKey.isPressed) || (Gamepad.current.leftShoulder.isPressed && !Gamepad.current.rightShoulder.isPressed))
+            if ((Keyboard.current.uKey.isPressed && !Keyboard.current.oKey.isPressed) || (Gamepad.current != null && Gamepad.current.leftShoulder.isPressed && !Gamepad.current.rightShoulder.isPressed))
             {
                 tankGun.transform.RotateAround(transform.position, Vector3.forward, tankRotationSpeed * Time.deltaTime * 30);
             }
-            else if (Keyboard.current.oKey.isPressed && !Keyboard.current.uKey.isPressed || (Gamepad.current.rightShoulder.isPressed && !Gamepad.current.leftShoulder.isPressed))
+            else if (Keyboard.current.oKey.isPressed && !Keyboard.current.uKey.isPressed || (Gamepad.current != null && Gamepad.current.rightShoulder.isPressed && !Gamepad.current.leftShoulder.isPressed))
             {
                 tankGun.transform.RotateAround(transform.position, Vector3.forward, -tankRotationSpeed * Time.deltaTime * 30);
             }
         }
     }
 
-    public void Respawn(Transform trans)
+    public void Respawn(Vector3 pos)
     {
         gameObject.SetActive(true);
-        gameObject.transform.position = trans.position;
+        gameObject.transform.position = pos;
+        Debug.Log(pos);
         GetComponent<Health>().ResetHealth();
     }
 }
