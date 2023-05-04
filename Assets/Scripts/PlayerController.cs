@@ -24,10 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float tankRotationSpeed = 5f;
     [SerializeField] float tankSpeedThreshold = 5f;
     public float fireRate = 4f;
+    Vector3 prevMousePosition;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        prevMousePosition = new Vector3(0, 0, 0);
     }
     void Start()
     {
@@ -69,11 +71,11 @@ public class PlayerController : MonoBehaviour
         //player one controls
         if (playerNum == 1)
         {
-            if (Keyboard.current.qKey.isPressed && !Keyboard.current.eKey.isPressed)
+            if ((Keyboard.current.qKey.isPressed && !Keyboard.current.eKey.isPressed) || (Keyboard.current.leftShiftKey.isPressed && !Keyboard.current.spaceKey.isPressed))
             {
                 tankGun.transform.RotateAround(transform.position, Vector3.forward, tankRotationSpeed * Time.deltaTime * 30);
             }
-            else if (Keyboard.current.eKey.isPressed && !Keyboard.current.qKey.isPressed)
+            else if ((Keyboard.current.eKey.isPressed && !Keyboard.current.qKey.isPressed) || (Keyboard.current.spaceKey.isPressed && !Keyboard.current.leftShiftKey.isPressed))
             {
                 tankGun.transform.RotateAround(transform.position, Vector3.forward, -tankRotationSpeed * Time.deltaTime * 30);
             }
@@ -81,14 +83,22 @@ public class PlayerController : MonoBehaviour
         //player two controls
         else
         {
-            if (Keyboard.current.uKey.isPressed && !Keyboard.current.oKey.isPressed)
+            if ((Keyboard.current.uKey.isPressed && !Keyboard.current.oKey.isPressed) || (Gamepad.current != null && Gamepad.current.leftShoulder.isPressed && !Gamepad.current.rightShoulder.isPressed))
             {
                 tankGun.transform.RotateAround(transform.position, Vector3.forward, tankRotationSpeed * Time.deltaTime * 30);
             }
-            else if (Keyboard.current.oKey.isPressed && !Keyboard.current.uKey.isPressed)
+            else if (Keyboard.current.oKey.isPressed && !Keyboard.current.uKey.isPressed || (Gamepad.current != null && Gamepad.current.rightShoulder.isPressed && !Gamepad.current.leftShoulder.isPressed))
             {
                 tankGun.transform.RotateAround(transform.position, Vector3.forward, -tankRotationSpeed * Time.deltaTime * 30);
             }
         }
+    }
+
+    public void Respawn(Vector3 pos)
+    {
+        gameObject.SetActive(true);
+        gameObject.transform.position = pos;
+        Debug.Log(pos);
+        GetComponent<Health>().ResetHealth();
     }
 }

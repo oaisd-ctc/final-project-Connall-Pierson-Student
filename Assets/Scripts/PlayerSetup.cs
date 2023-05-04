@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerSetup : MonoBehaviour
 {
-    [SerializeField] PlayerController playerOne;
-    [SerializeField] PlayerController playerTwo;
+    public PlayerController playerOne;
+    public PlayerController playerTwo;
 
     Coroutine FiringCoroutinePlayerOne;
     Coroutine FiringCoroutinePlayerTwo;
@@ -15,26 +15,74 @@ public class PlayerSetup : MonoBehaviour
 
     void Update()
     {
+        Move();
         Fire();
+        Debug.Log(playerOne.rawInputVector);
     }
-    void OnMove(InputValue value)
+
+    void Move()
     {
-        playerOne.rawInputVector = value.Get<Vector2>();
+        playerOne.rawInputVector = new Vector2(0f, 0f);
+        //Player One
+        if(Keyboard.current.wKey.isPressed && Keyboard.current.dKey.isPressed)
+            playerOne.rawInputVector = new Vector2(0.71f, 0.71f);
+        else if(Keyboard.current.wKey.isPressed && Keyboard.current.aKey.isPressed)
+            playerOne.rawInputVector = new Vector2(-0.71f, 0.71f);
+        else if(Keyboard.current.sKey.isPressed && Keyboard.current.aKey.isPressed)
+            playerOne.rawInputVector = new Vector2(-0.71f, -0.71f);
+        else if(Keyboard.current.sKey.isPressed && Keyboard.current.dKey.isPressed)
+            playerOne.rawInputVector = new Vector2(0.71f, -0.71f);
+        else if(Keyboard.current.wKey.isPressed)
+            playerOne.rawInputVector = new Vector2(0f, 1f);
+        else if(Keyboard.current.aKey.isPressed)
+            playerOne.rawInputVector = new Vector2(-1f, 0f);
+        else if(Keyboard.current.sKey.isPressed)
+            playerOne.rawInputVector = new Vector2(0f, -1f);
+        else if(Keyboard.current.dKey.isPressed)
+            playerOne.rawInputVector = new Vector2(1f, 0f);
+
+            //Player Two (Keyboard)
+        if(Keyboard.current.iKey.isPressed && Keyboard.current.lKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(0.71f, 0.71f);
+        else if(Keyboard.current.iKey.isPressed && Keyboard.current.jKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(-0.71f, 0.71f);
+        else if(Keyboard.current.kKey.isPressed && Keyboard.current.jKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(-0.71f, -0.71f);
+        else if(Keyboard.current.kKey.isPressed && Keyboard.current.lKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(0.71f, -0.71f);
+        else if(Keyboard.current.iKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(0f, 1f);
+        else if(Keyboard.current.jKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(-1f, 0f);
+        else if(Keyboard.current.kKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(0f, -1f);
+        else if(Keyboard.current.lKey.isPressed)
+            playerTwo.rawInputVector = new Vector2(1f, 0f);
+
+        //Player Two (Controller)
+        if(Gamepad.current != null)
+            playerTwo.rawInputVector = Gamepad.current.leftStick.ReadValue();
+
+        Debug.Log(playerTwo.rawInputVector);
     }
-    void OnMovePlayerTwo(InputValue value)
-    {
-        playerTwo.rawInputVector = value.Get<Vector2>();
-    }
+    // void OnMove(InputValue value)
+    // {
+    //     playerOne.rawInputVector = value.Get<Vector2>();
+    // }
+    // void OnMovePlayerTwo(InputValue value)
+    // {
+    //     playerTwo.rawInputVector = value.Get<Vector2>();
+    // }
 
     void Fire()
     {
         //Player one
-        if (Keyboard.current.fKey.wasPressedThisFrame && FiringCoroutinePlayerOne == null)
+        if ((Keyboard.current.fKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame) && FiringCoroutinePlayerOne == null)
         {
             IsFiringPlayerOne = true;
             FiringCoroutinePlayerOne = StartCoroutine(FireContinuouslyPlayerOne());
         }
-        else if (Keyboard.current.fKey.wasReleasedThisFrame)
+        else if (Keyboard.current.fKey.wasReleasedThisFrame || Mouse.current.leftButton.wasReleasedThisFrame)
         {
             StopCoroutine(FireContinuouslyPlayerOne());
             FiringCoroutinePlayerOne = null;
@@ -42,12 +90,12 @@ public class PlayerSetup : MonoBehaviour
         }
 
         //Player two
-        if (Keyboard.current.semicolonKey.wasPressedThisFrame && FiringCoroutinePlayerTwo == null)
+        if ((Keyboard.current.semicolonKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.rightTrigger.wasPressedThisFrame)) && FiringCoroutinePlayerTwo == null)
         {
             IsFiringPlayerTwo = true;
             FiringCoroutinePlayerTwo = StartCoroutine(FireContinuouslyPlayerTwo());
         }
-        else if (Keyboard.current.semicolonKey.wasReleasedThisFrame)
+        else if (Keyboard.current.semicolonKey.wasReleasedThisFrame || (Gamepad.current != null && Gamepad.current.rightTrigger.wasReleasedThisFrame))
         {
             StopCoroutine(FireContinuouslyPlayerTwo());
             FiringCoroutinePlayerTwo = null;
@@ -60,7 +108,8 @@ public class PlayerSetup : MonoBehaviour
         while (IsFiringPlayerOne)
         {
             GameObject projectileCreated = Instantiate(playerOne.projectile, playerOne.tankGunFront.transform.position, playerOne.tankGun.transform.rotation);
-            Destroy(projectileCreated, 5f);
+            projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerOne.GetComponent<PlayerController>();
+            Destroy(projectileCreated, 2f);
             projectileCreated.layer = playerOne.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
@@ -78,6 +127,7 @@ public class PlayerSetup : MonoBehaviour
         while (IsFiringPlayerTwo)
         {
             GameObject projectileCreated = Instantiate(playerTwo.projectile, playerTwo.tankGunFront.transform.position, playerTwo.tankGun.transform.rotation);
+            projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerTwo.GetComponent<PlayerController>();
             projectileCreated.layer = playerTwo.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
