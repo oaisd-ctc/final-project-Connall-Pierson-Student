@@ -4,10 +4,6 @@ using UnityEngine;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
-    [Header("Spawn Points")]
-    [SerializeField] Transform playerOneSpawnPoint;
-    [SerializeField] Transform playerTwoSpawnPoint;
-
     [Header("Player Controllers")]
     [SerializeField] PlayerController playerOne;
     [SerializeField] PlayerController playerTwo;
@@ -24,16 +20,18 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int playerOneScore = 0;
     [HideInInspector] public int playerTwoScore = 0;
 
+    MapManager mapManager;
+
 
     void Awake() 
     {
         scoreText.text = playerOneScore + " - " + playerTwoScore;
         broadcastText.text = "";
+        mapManager = FindObjectOfType<MapManager>();
     }
     void Start()
     {
-        playerOne.gameObject.transform.position = playerOneSpawnPoint.position;
-        playerTwo.gameObject.transform.position = playerTwoSpawnPoint.position;
+        RespawnPlayers();
     }
     public void WinRound(PlayerController player)
     {
@@ -76,12 +74,13 @@ public class GameManager : MonoBehaviour
     void NextRound()
     {
         broadcastText.text = "";
+        mapManager.ChangeMap();
         RespawnPlayers();
     }
 
     void RespawnPlayers()
     {
-        playerOne.Respawn(playerOneSpawnPoint);
-        playerTwo.Respawn(playerTwoSpawnPoint);
+        playerOne.Respawn(mapManager.currentMap.playerOneRespawnPoint.transform.position);
+        playerTwo.Respawn(mapManager.currentMap.playerTwoRespawnPoint.transform.position);
     }
 }
