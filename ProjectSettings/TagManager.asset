@@ -7,6 +7,7 @@ TagManager:
   - Player2
   - Player1
   - Fence
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - UI
   - Player 1
   - Player 2
-  - 
+  - Fence
   - 
   - 
   - 
