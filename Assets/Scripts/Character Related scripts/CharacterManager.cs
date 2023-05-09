@@ -35,7 +35,7 @@ public class CharacterManager : MonoBehaviour
     public void BackOption()
     {
         selectedOption--;
-        if (selectedOption <= 0)
+        if (selectedOption < 0)
         {
             selectedOption = characterDB.CharacterCount - 1;
         }
