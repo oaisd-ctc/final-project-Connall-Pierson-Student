@@ -9,6 +9,13 @@ public class PlayerSelectionScript : MonoBehaviour
     public CharacterDataBase characterDB;
     public Image artworkSprite;
     private int selectedOption = 0;
+    PlayerStats playerOne;
+    PlayerStats playerTwo;
+    void Awake() 
+    {
+        playerOne = FindObjectsOfType<PlayerStats>()[0];
+        playerTwo = FindObjectsOfType<PlayerStats>()[1];
+    }
     void Start()
     {
 if (!PlayerPrefs.HasKey("selectedOption"))
@@ -25,7 +32,7 @@ if (!PlayerPrefs.HasKey("selectedOption"))
     {
         Character character = characterDB.GetCharacter(selectedOption);
         artworkSprite.sprite = character.charcterSprite;
-
+        playerOne.playerStats.playerSprite = artworkSprite;
     }
     private void Load()
     {
