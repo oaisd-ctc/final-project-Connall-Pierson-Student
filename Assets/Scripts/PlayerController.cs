@@ -23,17 +23,38 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float tankAccelerationSpeed = 5f;
     [SerializeField] float tankRotationSpeed = 5f;
     [SerializeField] float tankSpeedThreshold = 5f;
-    public float fireRate = 4f;
+    [SerializeField] float tankSize = 1f;
+    public float tankProjectileSpeed = 6f;
+    public float tankFireRate = 4f;
+    public PlayerStats playerStats;
     Vector3 prevMousePosition;
+    SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         prevMousePosition = new Vector3(0, 0, 0);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Start()
     {
+        if(playerNum == 1)
+            playerStats = FindObjectsOfType<PlayerStats>()[0];
+        else if(playerNum == 2)
+            playerStats = FindObjectsOfType<PlayerStats>()[1];
+        else
+            Debug.Log("Something went wrong.");
+        
+        if(playerStats.playerSprite != null)
+            spriteRenderer.sprite = playerStats.playerSprite.sprite;
 
+        tankAccelerationSpeed = 5f + (playerStats.playerSpeedSkillPointsSpent * 5f);
+        tankSize = 1f - (playerStats.playerSizeSkillPointsSpent/14);
+        tankProjectileSpeed = (2f * playerStats.projectileSpeedSkillPointsSpent) + 5f;
+        tankFireRate = 2f + (playerStats.fireRateSkillPointsSpent); 
+
+        //Apply any variables that need to be applied
+        gameObject.transform.localScale = new Vector3(tankSize, tankSize, 1f);
     }
     void Update()
     {
