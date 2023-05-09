@@ -17,12 +17,12 @@ public class PlayerSetup : MonoBehaviour
     {
         Move();
         Fire();
-        Debug.Log(playerOne.rawInputVector);
     }
 
     void Move()
     {
         playerOne.rawInputVector = new Vector2(0f, 0f);
+        playerTwo.rawInputVector = new Vector2(0f, 0f);
         //Player One
         if(Keyboard.current.wKey.isPressed && Keyboard.current.dKey.isPressed)
             playerOne.rawInputVector = new Vector2(0.71f, 0.71f);
@@ -62,8 +62,6 @@ public class PlayerSetup : MonoBehaviour
         //Player Two (Controller)
         if(Gamepad.current != null)
             playerTwo.rawInputVector = Gamepad.current.leftStick.ReadValue();
-
-        Debug.Log(playerTwo.rawInputVector);
     }
     // void OnMove(InputValue value)
     // {
@@ -109,6 +107,7 @@ public class PlayerSetup : MonoBehaviour
         {
             GameObject projectileCreated = Instantiate(playerOne.projectile, playerOne.tankGunFront.transform.position, playerOne.tankGun.transform.rotation);
             projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerOne.GetComponent<PlayerController>();
+            projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed = projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner.tankProjectileSpeed;
             Destroy(projectileCreated, 2f);
             projectileCreated.layer = playerOne.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
@@ -118,7 +117,7 @@ public class PlayerSetup : MonoBehaviour
                     (playerOne.tankGunFront.transform.position.x - playerOne.transform.position.x) * projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed,
                     (playerOne.tankGunFront.transform.position.y - playerOne.transform.position.y) * projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed);
             }
-            yield return new WaitForSeconds(1f / playerOne.fireRate);
+            yield return new WaitForSeconds(1f / playerOne.tankFireRate);
         }
     }
 
@@ -128,6 +127,7 @@ public class PlayerSetup : MonoBehaviour
         {
             GameObject projectileCreated = Instantiate(playerTwo.projectile, playerTwo.tankGunFront.transform.position, playerTwo.tankGun.transform.rotation);
             projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerTwo.GetComponent<PlayerController>();
+            projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed = projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner.tankProjectileSpeed;
             projectileCreated.layer = playerTwo.gameObject.layer;
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
@@ -137,7 +137,7 @@ public class PlayerSetup : MonoBehaviour
                     (playerTwo.tankGunFront.transform.position.y - playerTwo.transform.position.y) * projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed);
 
             }
-            yield return new WaitForSeconds(1f / playerTwo.fireRate);
+            yield return new WaitForSeconds(1f / playerTwo.tankFireRate);
         }
     }
 }

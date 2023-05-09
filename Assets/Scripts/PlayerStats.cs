@@ -6,11 +6,13 @@ using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] public float playerSpeedSkillPointsSpent = 1f;
-    [SerializeField] public float projectileSpeedSkillPointsSpent = 1f;
-    [SerializeField] public float playerSizeSkillPointsSpent = 1f;
-    [SerializeField] public int skillPoints = 10;
-    [SerializeField] public int startingSkillPoints = 10;
+    public Image playerSprite;
+    public float playerSpeedSkillPointsSpent = 1f;
+    public float projectileSpeedSkillPointsSpent = 1f;
+    public float playerSizeSkillPointsSpent = 1f;
+    public float fireRateSkillPointsSpent = 1f;
+    public int skillPoints = 10;
+    public int startingSkillPoints = 10;
     [SerializeField] CharacterSelection player;
 
     public int GetSkillPointsNumber()
@@ -30,9 +32,9 @@ public class PlayerStats : MonoBehaviour
     }
     void UpdateSkillPoints()
     {
-        playerSpeedSkillPointsSpent = 1f + player.playerSpeed.value; 
-        playerSizeSkillPointsSpent = 1f + player.playerSize.value;
-        projectileSpeedSkillPointsSpent = 1f + player.projectileSpeed.value;
+        playerSpeedSkillPointsSpent = player.playerSpeed.value; 
+        playerSizeSkillPointsSpent = player.playerSize.value;
+        projectileSpeedSkillPointsSpent = player.projectileSpeed.value;
         skillPoints = startingSkillPoints
          - (int)(playerSpeedSkillPointsSpent + 0.001f)
          - (int)(playerSizeSkillPointsSpent + 0.001f)
