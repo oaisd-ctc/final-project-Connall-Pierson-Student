@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: New Character Data Base
   m_EditorClassIdentifier: 
   character:
-  - charactername: Square
-    charcterSprite: {fileID: 7482667652216324306, guid: 51580c6c0d275a443865c2d0fc46a006, type: 3}
-  - charactername: Circle
-    charcterSprite: {fileID: -2413806693520163455, guid: d6d539556e992c4499db34789e0cced5, type: 3}
-  - charactername: Other shape
-    charcterSprite: {fileID: -9095717837082945937, guid: 4085416fbd27084498e11402b9c7a572, type: 3}
+  - charactername: Red
+    charcterSprite: {fileID: 21300000, guid: a24e0bfdea9119543b10ed92f35b47c7, type: 3}
+  - charactername: Blue
+    charcterSprite: {fileID: 21300000, guid: c3464ea82dc4e36438c5659bab662437, type: 3}
+  - charactername: Green
+    charcterSprite: {fileID: 21300000, guid: ecaa97d04bd8f7a4a873c4f469e11911, type: 3}
+  - charactername: Yellow
+    charcterSprite: {fileID: 21300000, guid: 3004e333d3c4e5e41a9bf9c4cc9276e6, type: 3}
