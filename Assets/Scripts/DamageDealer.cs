@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     public float damage = 25f;
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnCollisionEnter2D(Collision2D other) 
     {
         if(other.gameObject.GetComponent<Health>() != null && other.gameObject.layer != gameObject.layer)
         {
@@ -15,5 +15,5 @@ public class DamageDealer : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
+    }  
 }

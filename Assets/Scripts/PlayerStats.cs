@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     public Image playerSprite;
@@ -11,8 +11,9 @@ public class PlayerStats : MonoBehaviour
     public float projectileSpeedSkillPointsSpent = 1f;
     public float playerSizeSkillPointsSpent = 1f;
     public float fireRateSkillPointsSpent = 1f;
-    public int skillPoints = 10;
-    public int startingSkillPoints = 10;
+    public float projectileLifetimeSkillPointsSpent = 1f;
+    public int skillPoints = 0;
+    public int startingSkillPoints = 15;
     [SerializeField] CharacterSelection player;
 
     public int GetSkillPointsNumber()
@@ -21,25 +22,33 @@ public class PlayerStats : MonoBehaviour
         return skillPoints;
     }
 
-    void Awake() 
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        skillPoints = startingSkillPoints;
     }
-    void Update() 
+    void Update()
     {
         // skillPoints = startingSkillPoints;
         UpdateSkillPoints();
     }
     void UpdateSkillPoints()
     {
-        playerSpeedSkillPointsSpent = player.playerSpeed.value; 
-        playerSizeSkillPointsSpent = player.playerSize.value;
-        projectileSpeedSkillPointsSpent = player.projectileSpeed.value;
-        skillPoints = startingSkillPoints
-         - (int)(playerSpeedSkillPointsSpent + 0.001f)
-         - (int)(playerSizeSkillPointsSpent + 0.001f)
-         - (int)(projectileSpeedSkillPointsSpent + 0.001f)
-         + 3; // <----- Number of stats that are customizable
+        if (SceneManager.GetActiveScene().name != "Game")
+        {
+            playerSpeedSkillPointsSpent = player.playerSpeed.value;
+            playerSizeSkillPointsSpent = player.playerSize.value;
+            projectileSpeedSkillPointsSpent = player.projectileSpeed.value;
+            fireRateSkillPointsSpent = player.fireRate.value;
+            projectileLifetimeSkillPointsSpent = player.projectileLifeTime.value;
+
+            skillPoints = startingSkillPoints
+             - (int)(playerSpeedSkillPointsSpent + 0.001f)
+             - (int)(playerSizeSkillPointsSpent + 0.001f)
+             - (int)(projectileSpeedSkillPointsSpent + 0.001f)
+             - (int)(fireRateSkillPointsSpent + 0.001f)
+             - (int)(projectileLifetimeSkillPointsSpent + 0.001f);
+        }
     }
 
 

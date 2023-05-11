@@ -8,15 +8,27 @@ public class PlayerSetup : MonoBehaviour
     public PlayerController playerOne;
     public PlayerController playerTwo;
 
+    public Sprite playerOneProjectileSprite;
+    public Sprite playerTwoProjectileSprite;
+
     Coroutine FiringCoroutinePlayerOne;
     Coroutine FiringCoroutinePlayerTwo;
     bool IsFiringPlayerOne;
     bool IsFiringPlayerTwo;
+    float playerOneFiringCooldown = -1f;
+    float playerTwoFiringCooldown = -1f;
 
     void Update()
     {
         Move();
         Fire();
+        TickCooldowns();
+    }
+
+    void TickCooldowns()
+    {
+        playerOneFiringCooldown -= Time.deltaTime;
+        playerTwoFiringCooldown -= Time.deltaTime;
     }
 
     void Move()
@@ -75,9 +87,10 @@ public class PlayerSetup : MonoBehaviour
     void Fire()
     {
         //Player one
-        if ((Keyboard.current.fKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame) && FiringCoroutinePlayerOne == null)
+        if ((Keyboard.current.fKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame) && FiringCoroutinePlayerOne == null && playerOneFiringCooldown <= 0 && playerOne.isAlive)
         {
             IsFiringPlayerOne = true;
+            playerOneFiringCooldown = playerOne.tankFireRate;
             FiringCoroutinePlayerOne = StartCoroutine(FireContinuouslyPlayerOne());
         }
         else if (Keyboard.current.fKey.wasReleasedThisFrame || Mouse.current.leftButton.wasReleasedThisFrame)
@@ -88,9 +101,10 @@ public class PlayerSetup : MonoBehaviour
         }
 
         //Player two
-        if ((Keyboard.current.semicolonKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.rightTrigger.wasPressedThisFrame)) && FiringCoroutinePlayerTwo == null)
+        if ((Keyboard.current.semicolonKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.rightTrigger.wasPressedThisFrame)) && FiringCoroutinePlayerTwo == null && playerTwoFiringCooldown <= 0 && playerTwo.isAlive)
         {
             IsFiringPlayerTwo = true;
+            playerTwoFiringCooldown = playerTwo.tankFireRate;
             FiringCoroutinePlayerTwo = StartCoroutine(FireContinuouslyPlayerTwo());
         }
         else if (Keyboard.current.semicolonKey.wasReleasedThisFrame || (Gamepad.current != null && Gamepad.current.rightTrigger.wasReleasedThisFrame))
@@ -103,13 +117,14 @@ public class PlayerSetup : MonoBehaviour
 
     IEnumerator FireContinuouslyPlayerOne()
     {
-        while (IsFiringPlayerOne)
+        while (IsFiringPlayerOne && playerOne.isAlive)
         {
             GameObject projectileCreated = Instantiate(playerOne.projectile, playerOne.tankGunFront.transform.position, playerOne.tankGun.transform.rotation);
+            projectileCreated.GetComponent<SpriteRenderer>().sprite = playerOneProjectileSprite;
             projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerOne.GetComponent<PlayerController>();
             projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed = projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner.tankProjectileSpeed;
-            Destroy(projectileCreated, 2f);
-            projectileCreated.layer = playerOne.gameObject.layer;
+            projectileCreated.layer = playerOne.gameObject.layer + 1;
+            Destroy(projectileCreated, playerOne.tankProjectileLifeTime);
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
                 var projectileRigidBody = projectileCreated.GetComponent<Rigidbody2D>();
@@ -117,18 +132,20 @@ public class PlayerSetup : MonoBehaviour
                     (playerOne.tankGunFront.transform.position.x - playerOne.transform.position.x) * projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed,
                     (playerOne.tankGunFront.transform.position.y - playerOne.transform.position.y) * projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed);
             }
-            yield return new WaitForSeconds(1f / playerOne.tankFireRate);
+            yield return new WaitForSeconds(playerOne.tankFireRate);
         }
     }
 
     IEnumerator FireContinuouslyPlayerTwo()
     {
-        while (IsFiringPlayerTwo)
+        while (IsFiringPlayerTwo && playerTwo.isAlive)
         {
             GameObject projectileCreated = Instantiate(playerTwo.projectile, playerTwo.tankGunFront.transform.position, playerTwo.tankGun.transform.rotation);
+            projectileCreated.GetComponent<SpriteRenderer>().sprite = playerTwoProjectileSprite;
             projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner = playerTwo.GetComponent<PlayerController>();
             projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed = projectileCreated.GetComponent<ProjectileBehavior>().projectileOwner.tankProjectileSpeed;
-            projectileCreated.layer = playerTwo.gameObject.layer;
+            projectileCreated.layer = playerTwo.gameObject.layer + 1;
+            Destroy(projectileCreated, playerTwo.tankProjectileLifeTime);
             if (projectileCreated.GetComponent<Rigidbody2D>() != null)
             {
                 var projectileRigidBody = projectileCreated.GetComponent<Rigidbody2D>();
@@ -137,7 +154,7 @@ public class PlayerSetup : MonoBehaviour
                     (playerTwo.tankGunFront.transform.position.y - playerTwo.transform.position.y) * projectileCreated.GetComponent<ProjectileBehavior>().projectileSpeed);
 
             }
-            yield return new WaitForSeconds(1f / playerTwo.tankFireRate);
+            yield return new WaitForSeconds(playerTwo.tankFireRate);
         }
     }
 }

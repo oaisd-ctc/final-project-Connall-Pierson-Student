@@ -18,23 +18,25 @@ public class ProjectileBehavior : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other) 
     {
-        if(other.gameObject.tag != "Fence" && other.gameObject.tag != "Wall")
+        if(other.gameObject.tag != "Fence")
             Destroy(gameObject);
         else
         {
             Vector2 inDirection = currentVelocity;
             Vector2 inNormal = other.contacts[0].normal;
             Vector2 newVelocity;
-            // if(other.contacts[0].normal.x < -Mathf.Epsilon)
-            // {
-            //     Debug.Log("Hit Side");
-            //     newVelocity = new Vector2(-inDirection.x, inDirection.y);
-            // }
-            // else
-            // {
-            //     Debug.Log("Hit Top/Bottom");
-            //     newVelocity = new Vector2(inDirection.x, -inDirection.y);
-            // }
+            if(other.contacts[0].normal.x < -Mathf.Epsilon)
+            {
+                //Debug.Log("Hit Side");
+                transform.rotation = Quaternion.Inverse(transform.rotation);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                //Debug.Log("Hit Top/Bottom");
+                transform.rotation = Quaternion.Inverse(transform.rotation);
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+            }
             newVelocity = Vector2.Reflect(inDirection, inNormal);
             rb.velocity = newVelocity;
         }

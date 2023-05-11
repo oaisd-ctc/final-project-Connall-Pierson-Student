@@ -18,12 +18,14 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     bool isMovingAtMaxSpeedX;
     bool isMovingAtMaxSpeedY;
+    [HideInInspector] public bool isAlive = true;
 
     [Header("Tank Stats")]
-    [SerializeField] float tankAccelerationSpeed = 5f;
-    [SerializeField] float tankRotationSpeed = 5f;
-    [SerializeField] float tankSpeedThreshold = 5f;
-    [SerializeField] float tankSize = 1f;
+    public float tankAccelerationSpeed = 5f;
+    public float tankRotationSpeed = 5f;
+    public float tankSpeedThreshold = 5f;
+    public float tankSize = 1f;
+    public float tankProjectileLifeTime = 1f;
     public float tankProjectileSpeed = 6f;
     public float tankFireRate = 4f;
     public PlayerStats playerStats;
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         prevMousePosition = new Vector3(0, 0, 0);
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = tankBody.GetComponent<SpriteRenderer>();
     }
     void Start()
     {
@@ -48,12 +50,15 @@ public class PlayerController : MonoBehaviour
         if(playerStats.playerSprite != null)
             spriteRenderer.sprite = playerStats.playerSprite.sprite;
 
-        tankAccelerationSpeed = 5f + (playerStats.playerSpeedSkillPointsSpent * 5f);
-        tankSize = 1f - (playerStats.playerSizeSkillPointsSpent/14);
-        tankProjectileSpeed = (2f * playerStats.projectileSpeedSkillPointsSpent) + 5f;
-        tankFireRate = 2f + (playerStats.fireRateSkillPointsSpent); 
+        tankAccelerationSpeed = 6f + (playerStats.playerSpeedSkillPointsSpent * 5f);
+        tankSize = 1f - (playerStats.playerSizeSkillPointsSpent/14f);
+        tankProjectileSpeed = (3.5f * playerStats.projectileSpeedSkillPointsSpent) + 16f;
+        tankFireRate = 1 / (2f + (playerStats.fireRateSkillPointsSpent * .66f)); 
+        tankProjectileLifeTime = 1.5f + (playerStats.projectileLifetimeSkillPointsSpent * .4f);
+        
 
         //Apply any variables that need to be applied
+        spriteRenderer.sprite = playerStats.playerSprite.sprite;
         gameObject.transform.localScale = new Vector3(tankSize, tankSize, 1f);
     }
     void Update()
@@ -118,8 +123,8 @@ public class PlayerController : MonoBehaviour
     public void Respawn(Vector3 pos)
     {
         gameObject.SetActive(true);
+        spriteRenderer.color = Color.white;
         gameObject.transform.position = pos;
-        Debug.Log(pos);
         GetComponent<Health>().ResetHealth();
     }
 }
