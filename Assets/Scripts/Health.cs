@@ -20,8 +20,8 @@ public class Health : MonoBehaviour
     }
     public void Damage(float damage, PlayerController dealer)
     {
-        Debug.Log(dealer);
         health -= damage;
+        StartCoroutine("PlayerHitVisualEffect");
         healthSlider.value = health / 100f;
         if (health < Mathf.Epsilon)
         {
@@ -29,6 +29,18 @@ public class Health : MonoBehaviour
             healthSlider.value = health;
             gameManager.WinRound(dealer);
             gameObject.SetActive(false);
+            GetComponent<PlayerController>().isAlive = false;
+        }
+    }
+
+    IEnumerator PlayerHitVisualEffect()
+    {
+        Debug.Log("visual effect");
+        if(GetComponentInChildren<SpriteRenderer>() != null)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(0.2f);
+            GetComponentInChildren<SpriteRenderer>().color = Color.white;
         }
     }
 }

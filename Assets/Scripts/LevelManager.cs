@@ -13,6 +13,12 @@ public class LevelManager : MonoBehaviour
     // }
     public void LoadGame()
     {
+        FindObjectsOfType<CharacterManager>()[0].gameObject.transform.SetParent(null);
+        FindObjectsOfType<CharacterManager>()[1].gameObject.transform.SetParent(null);
+        DontDestroyOnLoad(FindObjectsOfType<CharacterManager>()[0].gameObject);
+        DontDestroyOnLoad(FindObjectsOfType<CharacterManager>()[1].gameObject);
+        FindObjectsOfType<PlayerStats>()[0].playerSprite = FindObjectsOfType<CharacterManager>()[1].artworkSprite;
+        FindObjectsOfType<PlayerStats>()[1].playerSprite = FindObjectsOfType<CharacterManager>()[0].artworkSprite;
         // scoreKeeper.ResetScore();
         SceneManager.LoadScene("Game");
     }
@@ -21,6 +27,14 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadMainMenu()
     {
+        foreach(PlayerStats playerStats in FindObjectsOfType<PlayerStats>())
+        {
+            Destroy(playerStats.gameObject);
+        }
+        foreach(CharacterManager characterManager in FindObjectsOfType<CharacterManager>())
+        {
+            Destroy(characterManager.gameObject);
+        }
         SceneManager.LoadScene("Main Menu");
     }
     public void LoadGameOver()

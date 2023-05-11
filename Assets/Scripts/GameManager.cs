@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     }
     public void WinRound(PlayerController player)
     {
+        //Destroy all active projectiles
+        DestroyAllProjectiles();
+
         if (player.playerNum == 1)
         {
             playerOneScore++;
@@ -65,6 +68,15 @@ public class GameManager : MonoBehaviour
         }
         scoreText.text = playerOneScore + " - " + playerTwoScore;
     }
+
+    void DestroyAllProjectiles()
+    {
+        ProjectileBehavior[] projectiles = FindObjectsOfType<ProjectileBehavior>();
+        foreach(ProjectileBehavior projectile in projectiles)
+        {
+            Destroy(projectile.gameObject);
+        }
+    }
     
     void LoadMainMenu()
     {
@@ -73,6 +85,7 @@ public class GameManager : MonoBehaviour
     }
     void NextRound()
     {
+        DestroyAllProjectiles();
         broadcastText.text = "";
         mapManager.ChangeMap();
         RespawnPlayers();

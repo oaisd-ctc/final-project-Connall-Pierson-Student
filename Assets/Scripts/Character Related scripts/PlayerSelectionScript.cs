@@ -32,7 +32,6 @@ if (!PlayerPrefs.HasKey("selectedOption"))
     {
         Character character = characterDB.GetCharacter(selectedOption);
         artworkSprite.sprite = character.charcterSprite;
-        playerOne.playerStats.playerSprite = artworkSprite;
     }
     private void Load()
     {

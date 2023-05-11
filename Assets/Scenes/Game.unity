@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 382132607}
   - component: {fileID: 382132612}
   - component: {fileID: 382132613}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Player 2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1059,10 +1059,12 @@ MonoBehaviour:
   projectile: {fileID: 3123397090586196477, guid: d8a18fa3e6201a541952f7b588991593, type: 3}
   tankGunFront: {fileID: 449397614}
   rawInputVector: {x: 0, y: 0}
+  isAlive: 1
   tankAccelerationSpeed: 20
-  tankRotationSpeed: 5
+  tankRotationSpeed: 12
   tankSpeedThreshold: 15
   tankSize: 1
+  tankProjectileLifeTime: 1
   tankProjectileSpeed: 6
   tankFireRate: 4
   playerStats: {fileID: 0}
@@ -1151,7 +1153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 449397615}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Tank Gun Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449397614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.429, z: 0}
+  m_LocalPosition: {x: 0, y: 0.117, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1516,10 +1518,12 @@ MonoBehaviour:
   projectile: {fileID: 3123397090586196477, guid: d8a18fa3e6201a541952f7b588991593, type: 3}
   tankGunFront: {fileID: 836116429}
   rawInputVector: {x: 0, y: 0}
+  isAlive: 1
   tankAccelerationSpeed: 20
-  tankRotationSpeed: 8
+  tankRotationSpeed: 12
   tankSpeedThreshold: 15
   tankSize: 1
+  tankProjectileLifeTime: 1
   tankProjectileSpeed: 6
   tankFireRate: 8
   playerStats: {fileID: 0}
@@ -4271,7 +4275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836116429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.429, z: 0}
+  m_LocalPosition: {x: 0, y: 0.117, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4310,6 +4314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOne: {fileID: 590613609}
   playerTwo: {fileID: 382132612}
+  playerOneProjectileSprite: {fileID: 21300000, guid: 2abf425d7d291464badce865b992fb6d, type: 3}
+  playerTwoProjectileSprite: {fileID: 21300000, guid: 102cafc972ef92646936529deab61271, type: 3}
 --- !u!114 &870207467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4367,7 +4373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 911229373}
   - component: {fileID: 911229372}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Tank Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5834,7 +5840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516701299}
   - component: {fileID: 1516701300}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Tank Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6403,7 +6409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1962354174434617092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9366,7 +9372,7 @@ GameObject:
   - component: {fileID: 282759142}
   - component: {fileID: 282759141}
   - component: {fileID: 282759140}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fence Tilemap
   m_TagString: Fence
   m_Icon: {fileID: 0}
@@ -17649,7 +17655,7 @@ GameObject:
   - component: {fileID: 1480200380}
   - component: {fileID: 1480200379}
   - component: {fileID: 1480200378}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fence Tilemap
   m_TagString: Fence
   m_Icon: {fileID: 0}
@@ -18142,7 +18148,7 @@ GameObject:
   - component: {fileID: 130380021}
   - component: {fileID: 130380020}
   - component: {fileID: 130380019}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fence Tilemap
   m_TagString: Fence
   m_Icon: {fileID: 0}
@@ -20910,7 +20916,7 @@ GameObject:
   - component: {fileID: 2047106493}
   - component: {fileID: 2047106492}
   - component: {fileID: 2047106491}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fence Tilemap
   m_TagString: Fence
   m_Icon: {fileID: 0}
@@ -22572,7 +22578,7 @@ GameObject:
   - component: {fileID: 1947559651}
   - component: {fileID: 1947559650}
   - component: {fileID: 1947559649}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fence Tilemap
   m_TagString: Fence
   m_Icon: {fileID: 0}
@@ -22995,7 +23001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1962354176449411920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23971,7 +23977,7 @@ GameObject:
   - component: {fileID: 1058273889}
   - component: {fileID: 1058273888}
   - component: {fileID: 1058273887}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fence Tilemap
   m_TagString: Fence
   m_Icon: {fileID: 0}

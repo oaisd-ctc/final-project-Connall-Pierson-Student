@@ -17,13 +17,18 @@ public class CharacterSelection : MonoBehaviour
     public Slider playerSpeed;
     public Slider projectileSpeed;
     public Slider playerSize;
+    public Slider fireRate;
+    public Slider projectileLifeTime;
+  
+
     //If more sliders are created some other stuff needs to be done. Like making more textmesh pro stuff and so on. just dont add any without letting me know.--connall
     [Header("Text changing stuff")]
     [SerializeField] TextMeshProUGUI skillpointsnumber;
     [SerializeField] TextMeshProUGUI playerSpeedNumberdisplay;
     [SerializeField] TextMeshProUGUI playerSizeNumberdisplay;
-
     [SerializeField] TextMeshProUGUI projectileSpeedNumberdisplay;
+    [SerializeField] TextMeshProUGUI fireRateNumberdisplay;
+    [SerializeField] TextMeshProUGUI projectileLifeTimeNumberdisplay;
 
 
 
@@ -38,9 +43,11 @@ public class CharacterSelection : MonoBehaviour
     void DisplayThingsOnUI()
     {
         skillpointsnumber.text = "You have " + playerStats.GetSkillPointsNumber() + " left";
-        playerSpeedNumberdisplay.text = "You have used " + (playerStats.playerSpeedSkillPointsSpent - 1) + " for player speed.";
-        projectileSpeedNumberdisplay.text = "You have used " + (playerStats.projectileSpeedSkillPointsSpent - 1) + " for bullet speed.";
-        playerSizeNumberdisplay.text = "You have used " + (playerStats.playerSizeSkillPointsSpent - 1) + " for player size.";
+        playerSpeedNumberdisplay.text = "You have used " + (playerStats.playerSpeedSkillPointsSpent) + " for player speed.";
+        projectileSpeedNumberdisplay.text = "You have used " + (playerStats.projectileSpeedSkillPointsSpent) + " for bullet speed.";
+        playerSizeNumberdisplay.text = "You have used " + (playerStats.playerSizeSkillPointsSpent) + " for player size.";
+        fireRateNumberdisplay.text = "You have used "+ (playerStats.fireRateSkillPointsSpent)+ " for fire rate.";
+        projectileLifeTimeNumberdisplay.text = "You have used "+ (playerStats.projectileLifetimeSkillPointsSpent)+ " for bullet lifetime.";
     }
     // public void NextCharacter()
     // {
