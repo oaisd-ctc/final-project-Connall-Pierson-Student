@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
     public void Respawn(Vector3 pos)
     {
         gameObject.SetActive(true);
+        isAlive = true;
         spriteRenderer.color = Color.white;
         gameObject.transform.position = pos;
         GetComponent<Health>().ResetHealth();
