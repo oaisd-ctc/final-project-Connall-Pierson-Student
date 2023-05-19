@@ -17,7 +17,7 @@ public class MapManager : MonoBehaviour
 
     public void ChangeMap()
     {
-        currentMap = maps[Random.Range(0, 5)].GetComponent<Map>();
+        currentMap = maps[Random.Range(1, 6)].GetComponent<Map>();
 
         foreach(GameObject map in maps)
         {

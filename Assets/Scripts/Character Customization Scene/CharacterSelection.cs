@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
+    //SoundManager soundManager;
+  // public  AudioClip clip;
     // public GameObject[] characters;
     // public int selectedCharacter = 0;
     public bool isReady = false;
@@ -35,6 +37,7 @@ public class CharacterSelection : MonoBehaviour
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
+       // soundManager = FindObjectOfType<SoundManager>();
     }
     void Update()
     {
@@ -72,12 +75,41 @@ public class CharacterSelection : MonoBehaviour
         {
             isReady = true;
             Debug.Log("Ready");
+            //disable sliders
+            TurnoffAllSliders();
+            //play soundtrack for "game" music
+          //  soundManager.PlayMusic(clip);
+
+
         }
         else
         {
             Debug.Log("Too many skill points used");
         }
-
+    }
+    public void TurnoffAllSliders()
+    {
+        DisableSlider(playerSpeed);
+        DisableSlider(projectileSpeed);
+        DisableSlider(playerSize);
+        DisableSlider(fireRate);
+        DisableSlider(projectileLifeTime);
+    }
+    public void TurnonAllSliders()
+    {
+        EnableSlider(playerSpeed);
+        EnableSlider(projectileSpeed);
+        EnableSlider(playerSize);
+        EnableSlider(fireRate);
+        EnableSlider(projectileLifeTime);
+    }
+    public void DisableSlider(Slider stat)
+    {
+        stat.gameObject.SetActive(false);
+    }
+    public void EnableSlider(Slider stat)
+    {
+        stat.gameObject.SetActive(true);
     }
 
 

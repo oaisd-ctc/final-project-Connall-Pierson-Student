@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+   // SoundManager SoundManager;
+   //[SerializeField] AudioClip clip;
     [SerializeField] float timeDelay = 1f;
     // ScoreKeeper scoreKeeper;
     // void Awake()
@@ -24,6 +26,7 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadChararcterMenu(){
         SceneManager.LoadScene("CharacterSelection");
+        //SoundManager.PlayMusic(clip);
     }
     public void LoadMainMenu()
     {
